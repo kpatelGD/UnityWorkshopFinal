@@ -11,6 +11,8 @@ public class LaunchProjectile : MonoBehaviour
 
     [SerializeField] float fadeDuration = 0.3f;
 
+    private AudioSource hitSound;
+
     private void Awake()
     {
         cam = Camera.main.transform;
@@ -18,7 +20,7 @@ public class LaunchProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        hitSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -41,6 +43,7 @@ public class LaunchProjectile : MonoBehaviour
                 if (hit.collider.CompareTag("Enemy"))
                 {
                     Destroy(hit.collider.gameObject);
+                    hitSound.Play();
 
                 }
             }
