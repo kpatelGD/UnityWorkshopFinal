@@ -31,30 +31,35 @@ public class LaunchProjectile : MonoBehaviour
 
     public void Shoot()
     {
-        RaycastHit hit;
-        Vector3 shootingDir = GetShootingDirection();
-        
-        if (Physics.Raycast(cam.position, shootingDir, out hit, range))
+        if(PauseMenu.isPaused == false)
         {
-            if (hit.collider != null)
-            {
-                CreateProjectile(hit.point);
-                print(hit.collider.name);
-                if (hit.collider.CompareTag("Enemy"))
-                {
-                    Destroy(hit.collider.gameObject);
-                    hitSound.Play();
+            RaycastHit hit;
+                    Vector3 shootingDir = GetShootingDirection();
+        
+                    if (Physics.Raycast(cam.position, shootingDir, out hit, range))
+                    {
+                        if (hit.collider != null)
+                        {
+                            CreateProjectile(hit.point);
+                            print(hit.collider.name);
+                            if (hit.collider.CompareTag("Enemy"))
+                            {
+                                Destroy(hit.collider.gameObject);
+                                hitSound.Play();
 
-                }
-            }
-            else
-            {
-                CreateProjectile(cam.position + shootingDir * range);
+                            }
+                        }
+                        else
+                        {
+                            CreateProjectile(cam.position + shootingDir * range);
 
-            }
+                        }
 
 
+                    }
         }
+
+        
 
     }
 
